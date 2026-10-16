@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffedf3">
+<title>Ты моё солнце ♡</title>
+<style>
+  :root { --pink:#ff6f9f; --deep:#c52e67; --cream:#fff8fb; --ink:#54263a; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    margin:0; color:var(--ink); font-family: "Trebuchet MS", system-ui, sans-serif;
+    background: radial-gradient(circle at 15% 10%, #fff 0, transparent 28%),
+                linear-gradient(150deg,#fff3f7,#ffe0eb 55%,#fff8fb);
+    overflow-x:hidden;
+  }
+  .hearts { position:fixed; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
+  .heart { position:absolute; bottom:-40px; opacity:.42; animation: floatUp linear infinite; }
+  @keyframes floatUp { from { transform:translateY(0) rotate(0deg); opacity:0; } 12% {opacity:.45;} to {transform:translateY(-115vh) rotate(35deg); opacity:0;} }
+  main { position:relative; z-index:1; }
+  .hero { min-height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:48px 22px 64px; }
+  .pill { display:inline-block; padding:9px 15px; border:1px solid #ffc3d6; border-radius:999px; background:#ffffffa8; font-size:.83rem; letter-spacing:.04em; }
+  h1 { font-family: Georgia, serif; font-weight:normal; font-size:clamp(3.1rem,12vw,6.4rem); line-height:.98; margin:24px 0 18px; color:var(--deep); letter-spacing:-.055em; }
+  .subtitle { max-width:560px; font-size:clamp(1rem,3.5vw,1.25rem); line-height:1.7; margin:0 auto 28px; }
+  .big-heart { font-size:clamp(4rem,15vw,7rem); line-height:1; filter:drop-shadow(0 12px 20px #f48aac55); animation: beat 1.6s ease-in-out infinite; }
+  @keyframes beat { 0%,100%{transform:scale(1)} 12%{transform:scale(1.09)} 22%{transform:scale(1)} 34%{transform:scale(1.05)} }
+  .btn { border:0; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:14px 22px; border-radius:999px; color:white; background:linear-gradient(135deg,#ff7aa7,#e8437b); font-size:1rem; font-weight:700; box-shadow:0 9px 22px #e8437b30; transition:transform .2s, box-shadow .2s; }
+  .btn:hover { transform:translateY(-2px); box-shadow:0 12px 28px #e8437b45; }
+  section { padding:68px 20px; }
+  .section-inner { width:min(900px,100%); margin:auto; }
+  .eyebrow { color:#d34d7c; text-transform:uppercase; letter-spacing:.17em; font-size:.75rem; font-weight:700; text-align:center; }
+  h2 { font:normal clamp(2rem,7vw,3.4rem)/1.1 Georgia,serif; text-align:center; margin:12px 0 28px; color:var(--deep); }
+  .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .card { padding:24px 20px; border:1px solid #ffd0df; border-radius:22px; background:#ffffffb8; box-shadow:0 12px 35px #a82b5810; text-align:center; }
+  .card .emoji { font-size:2rem; }
+  .card h3 { margin:12px 0 8px; font:normal 1.3rem Georgia,serif; color:#a82c5d; }
+  .card p { line-height:1.65; margin:0; font-size:.96rem; }
+  .letter { background:#ffffffa8; border:1px solid #ffd0df; border-radius:26px; padding:clamp(24px,6vw,48px); box-shadow:0 16px 50px #a82b5812; text-align:center; }
+  .letter p { font:normal clamp(1.05rem,3.5vw,1.25rem)/1.9 Georgia,serif; margin:0 auto 16px; max-width:650px; }
+  .signature { color:var(--deep); font:italic 1.5rem Georgia,serif; margin-top:24px; }
+  .secret { display:none; margin:24px auto 0; max-width:650px; line-height:1.8; background:#fff5f8; border-radius:18px; padding:22px; animation: appear .5s ease; }
+  .secret.show { display:block; }
+  @keyframes appear { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .reasons { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .reason { background:#ffffffb8; border:1px solid #ffd0df; border-radius:16px; padding:17px 18px; line-height:1.55; }
+  .reason span { color:#e8437b; margin-right:8px; }
+  .final { text-align:center; padding:75px 20px 90px; }
+  .final h2 { margin-bottom:16px; }
+  .final p { line-height:1.8; max-width:540px; margin:0 auto 25px; }
+  footer { text-align:center; padding:20px; color:#a85b78; font-size:.82rem; }
+  @media(max-width:650px) { .cards{grid-template-columns:1fr;} .card{padding:22px;} .reasons{grid-template-columns:1fr;} section{padding:54px 18px;} }
+  @media(prefers-reduced-motion:reduce) { *,*::before,*::after{animation-duration:.01ms!important;scroll-behavior:auto!important;} }
+</style>
+</head>
+<body>
+<div class="hearts" id="hearts" aria-hidden="true"></div>
+<main>
+  <header class="hero">
+    <span class="pill">маленький сайт для самого дорогого человека ♡</span>
+    <div class="big-heart" aria-hidden="true">❤️</div>
+    <h1>Ты моё<br>солнце</h1>
+    <p class="subtitle">Если бы мне пришлось выбирать самое прекрасное, что случилось со мной, я бы каждый раз выбирал тебя.</p>
+    <a class="btn" href="#letter">У меня есть кое-что для тебя <span>♡</span></a>
+  </header>
+
+  <section>
+    <div class="section-inner">
+      <div class="eyebrow">просто напоминание</div>
+      <h2>Почему именно ты?</h2>
+      <div class="cards">
+        <article class="card"><div class="emoji">☀️</div><h3>Ты — моё солнце</h3><p>С тобой даже самый обычный день становится теплее и светлее.</p></article>
+        <article class="card"><div class="emoji">🫶</div><h3>С тобой спокойно</h3><p>Рядом с тобой я могу быть собой. И это бесценно.</p></article>
+        <article class="card"><div class="emoji">💗</div><h3>Ты — мой выбор</h3><p>Не только в красивые моменты. Я хочу выбирать тебя снова и снова.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="letter">
+    <div class="section-inner">
+      <div class="eyebrow">от всего сердца</div>
+      <h2>Письмо для тебя</h2>
+      <div class="letter">
+        <p>Любимая, я не всегда могу подобрать идеальные слова, чтобы объяснить, как много ты для меня значишь.</p>
+        <p>Но я хочу, чтобы ты знала: ты делаешь мою жизнь счастливее просто тем, что ты в ней есть. Мне дороги твоя улыбка, твой голос, наши моменты и даже наши маленькие глупости.</p>
+        <p>Я хочу обнимать тебя, поддерживать, смешить, быть рядом, когда тебе грустно, и радоваться вместе с тобой, когда всё хорошо.</p>
+        <p><strong>Я люблю тебя. Не за что-то одно — а за то, какая ты есть.</strong></p>
+        <div class="signature">Твой человек ♡</div>
+        <button class="btn" id="secretBtn" type="button" style="margin-top:24px">И ещё кое-что… 💌</button>
+        <div class="secret" id="secret">
+          Если вдруг у тебя будет тяжёлый день — вспомни, что где-то есть человек, который безумно рад, что именно ты есть в его жизни. И этот человек очень-очень тебя любит. ❤️
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-inner">
+      <div class="eyebrow">много маленьких причин</div>
+      <h2>Я люблю в тебе…</h2>
+      <div class="reasons">
+        <div class="reason"><span>♡</span>Твою улыбку, от которой я сам начинаю улыбаться.</div>
+        <div class="reason"><span>♡</span>Твой голос, который хочется слушать ещё и ещё.</div>
+        <div class="reason"><span>♡</span>То, как ты умеешь делать обычные моменты особенными.</div>
+        <div class="reason"><span>♡</span>Твои объятия, в которых хочется задержаться подольше.</div>
+        <div class="reason"><span>♡</span>Наши разговоры, шутки и воспоминания.</div>
+        <div class="reason"><span>♡</span>Тебя. Целиком. Настоящую. Моё любимое чудо.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="big-heart" aria-hidden="true">💞</div>
+    <h2>И самое главное…</h2>
+    <p>Как бы ни менялись дни, планы и обстоятельства, я хочу продолжать создавать с тобой воспоминания. Спасибо, что ты есть. Я очень сильно тебя люблю.</p>
+    <button class="btn" id="hugBtn" type="button">Отправить тебе миллион обнимашек</button>
+    <p id="hugMessage" style="display:none;margin-top:22px;color:#c52e67;font-weight:700">Обнимаю крепко-крепко! 🤗💗💗💗</p>
+  </section>
+</main>
+<footer>Сделано с любовью — специально для тебя ♡</footer>
+<script>
+  const heartLayer = document.getElementById('hearts');
+  const symbols = ['♡','♥','💕','✦'];
+  for (let i = 0; i < 22; i++) {
+    const heart = document.createElement('span');
+    heart.className = 'heart';
+    heart.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    heart.style.left = Math.random() * 100 + '%';
+    heart.style.fontSize = (14 + Math.random() * 22) + 'px';
+    heart.style.animationDuration = (10 + Math.random() * 15) + 's';
+    heart.style.animationDelay = (-Math.random() * 20) + 's';
+    heartLayer.appendChild(heart);
+  }
+  document.getElementById('secretBtn').addEventListener('click', () => {
+    const note = document.getElementById('secret');
+    note.classList.toggle('show');
+    document.getElementById('secretBtn').textContent = note.classList.contains('show') ? 'Спрятать послание ♡' : 'И ещё кое-что… 💌';
+  });
+  document.getElementById('hugBtn').addEventListener('click', () => {
+    document.getElementById('hugMessage').style.display = 'block';
+    document.getElementById('hugBtn').textContent = 'Обнимашки отправлены! 💗';
+  });
+</script>
+</body>
+</html>
